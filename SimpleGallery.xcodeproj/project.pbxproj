@@ -11,6 +11,9 @@
 		68987F012152DEC800101D23 /* SimpleGallery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68987EFF2152DEC800101D23 /* SimpleGallery.xcdatamodeld */; };
 		68987F032152DEC900101D23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68987F022152DEC900101D23 /* Assets.xcassets */; };
 		68987F062152DEC900101D23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68987F042152DEC900101D23 /* LaunchScreen.storyboard */; };
+		68987F142152E05800101D23 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F132152E05800101D23 /* BaseCoordinator.swift */; };
+		68987F162152E06900101D23 /* ViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F152152E06900101D23 /* ViewControllerType.swift */; };
+		68987F182152E08B00101D23 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F172152E08B00101D23 /* ViewModelProtocol.swift */; };
 		DD59DB23C419E2A7B3291CA0 /* Pods_SimpleGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BEB774806AA1EC67090900 /* Pods_SimpleGallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +25,9 @@
 		68987F022152DEC900101D23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68987F052152DEC900101D23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68987F072152DEC900101D23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68987F132152E05800101D23 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		68987F152152E06900101D23 /* ViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerType.swift; sourceTree = "<group>"; };
+		68987F172152E08B00101D23 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		77DD3951E1D17679B48C46C7 /* Pods-SimpleGallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleGallery.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleGallery/Pods-SimpleGallery.release.xcconfig"; sourceTree = "<group>"; };
 		D4BEB774806AA1EC67090900 /* Pods_SimpleGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -67,6 +73,7 @@
 		68987EF72152DEC800101D23 /* SimpleGallery */ = {
 			isa = PBXGroup;
 			children = (
+				68987F122152E04300101D23 /* BaseLayer */,
 				68987F0E2152DFE900101D23 /* UseCases */,
 				68987F0D2152DF6E00101D23 /* App */,
 				68987F022152DEC900101D23 /* Assets.xcassets */,
@@ -114,6 +121,16 @@
 			children = (
 			);
 			path = Albums;
+			sourceTree = "<group>";
+		};
+		68987F122152E04300101D23 /* BaseLayer */ = {
+			isa = PBXGroup;
+			children = (
+				68987F132152E05800101D23 /* BaseCoordinator.swift */,
+				68987F152152E06900101D23 /* ViewControllerType.swift */,
+				68987F172152E08B00101D23 /* ViewModelProtocol.swift */,
+			);
+			path = BaseLayer;
 			sourceTree = "<group>";
 		};
 		7C7EA783D72D368C350951AB /* Pods */ = {
@@ -244,7 +261,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68987F162152E06900101D23 /* ViewControllerType.swift in Sources */,
+				68987F182152E08B00101D23 /* ViewModelProtocol.swift in Sources */,
 				68987EF92152DEC800101D23 /* AppDelegate.swift in Sources */,
+				68987F142152E05800101D23 /* BaseCoordinator.swift in Sources */,
 				68987F012152DEC800101D23 /* SimpleGallery.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
