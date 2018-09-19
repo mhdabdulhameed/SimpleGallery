@@ -18,7 +18,7 @@ final class AlbumsCoordinator: BaseCoordinator<Void> {
     }
     
     override func start() -> Observable<Void> {
-        let viewModel = AlbumsViewModel(networkManager: MoyaNetworkManager.shared)
+        let viewModel = AlbumsViewModel()
         let viewController = AlbumsViewController()
         viewController.viewModel = viewModel
         let navigationController = UINavigationController(rootViewController: viewController)

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class AlbumsViewController: UIViewController, ViewControllerType {
     typealias ViewModelType = AlbumsViewModel
@@ -15,8 +17,17 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
     
     var viewModel: AlbumsViewModel!
     
+    private let disposeBag = DisposeBag()
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        return UIRefreshControl()
+    }()
+    
     private lazy var albumsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.register(UINib(nibName: Constants.NibFilesNames.albumTableViewCell, bundle: nil),
+                           forCellReuseIdentifier: AlbumTableViewCell.reuseIdentifier)
+        tableView.insertSubview(refreshControl, at: 0)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -26,6 +37,10 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Albums"
+        
+        refreshControl.sendActions(for: .valueChanged)
+        
         configure(with: viewModel)
         addViews()
     }
@@ -34,6 +49,21 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
     
     func configure(with viewModel: AlbumsViewModel) {
         
+        // View Model outputs to the View Controller
+        
+        viewModel.output.albums
+            .observeOn(MainScheduler.instance)
+            .do(onNext: { [weak self] _ in self?.refreshControl.endRefreshing() })
+            .bind(to: albumsTableView.rx.items(cellIdentifier: AlbumTableViewCell.reuseIdentifier, cellType: AlbumTableViewCell.self)) { _, item, cell in
+                cell.configure(with: item)
+            }
+            .disposed(by: disposeBag)
+        
+        // View Controller UI actions to the View Model
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .bind(to: viewModel.input.reload)
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Private Methods

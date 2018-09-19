@@ -24,6 +24,11 @@
 		68987F2B2152E7C300101D23 /* AlbumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F2A2152E7C300101D23 /* AlbumsViewModel.swift */; };
 		68987F2D2152E7D200101D23 /* AlbumsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F2C2152E7D200101D23 /* AlbumsCoordinator.swift */; };
 		68987F2F2152F15E00101D23 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F2E2152F15E00101D23 /* AppCoordinator.swift */; };
+		68987F322152F72600101D23 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F312152F72600101D23 /* Album.swift */; };
+		68987F342152F93900101D23 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F332152F93900101D23 /* AlbumViewModel.swift */; };
+		68987F382153043D00101D23 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F362153043D00101D23 /* AlbumTableViewCell.swift */; };
+		68987F392153043D00101D23 /* AlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68987F372153043D00101D23 /* AlbumTableViewCell.xib */; };
+		68987F3F215307D600101D23 /* NibFilesNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F3E215307D600101D23 /* NibFilesNames.swift */; };
 		DD59DB23C419E2A7B3291CA0 /* Pods_SimpleGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BEB774806AA1EC67090900 /* Pods_SimpleGallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +53,11 @@
 		68987F2A2152E7C300101D23 /* AlbumsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewModel.swift; sourceTree = "<group>"; };
 		68987F2C2152E7D200101D23 /* AlbumsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsCoordinator.swift; sourceTree = "<group>"; };
 		68987F2E2152F15E00101D23 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		68987F312152F72600101D23 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		68987F332152F93900101D23 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
+		68987F362153043D00101D23 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
+		68987F372153043D00101D23 /* AlbumTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumTableViewCell.xib; sourceTree = "<group>"; };
+		68987F3E215307D600101D23 /* NibFilesNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibFilesNames.swift; sourceTree = "<group>"; };
 		77DD3951E1D17679B48C46C7 /* Pods-SimpleGallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleGallery.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleGallery/Pods-SimpleGallery.release.xcconfig"; sourceTree = "<group>"; };
 		D4BEB774806AA1EC67090900 /* Pods_SimpleGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -93,6 +103,7 @@
 		68987EF72152DEC800101D23 /* SimpleGallery */ = {
 			isa = PBXGroup;
 			children = (
+				68987F302152F71800101D23 /* DomainModels */,
 				68987F212152E35B00101D23 /* Skeleton */,
 				68987F192152E18100101D23 /* NetworkManager */,
 				68987F122152E04300101D23 /* BaseLayer */,
@@ -142,9 +153,11 @@
 		68987F112152DFFE00101D23 /* Albums */ = {
 			isa = PBXGroup;
 			children = (
+				68987F352153042100101D23 /* Views */,
 				68987F2C2152E7D200101D23 /* AlbumsCoordinator.swift */,
 				68987F2A2152E7C300101D23 /* AlbumsViewModel.swift */,
 				68987F282152E7B300101D23 /* AlbumsViewController.swift */,
+				68987F332152F93900101D23 /* AlbumViewModel.swift */,
 			);
 			path = Albums;
 			sourceTree = "<group>";
@@ -175,8 +188,26 @@
 			children = (
 				68987F222152E36E00101D23 /* Constants.swift */,
 				68987F242152E39000101D23 /* APIConstants.swift */,
+				68987F3E215307D600101D23 /* NibFilesNames.swift */,
 			);
 			path = Skeleton;
+			sourceTree = "<group>";
+		};
+		68987F302152F71800101D23 /* DomainModels */ = {
+			isa = PBXGroup;
+			children = (
+				68987F312152F72600101D23 /* Album.swift */,
+			);
+			path = DomainModels;
+			sourceTree = "<group>";
+		};
+		68987F352153042100101D23 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				68987F362153043D00101D23 /* AlbumTableViewCell.swift */,
+				68987F372153043D00101D23 /* AlbumTableViewCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7C7EA783D72D368C350951AB /* Pods */ = {
@@ -250,6 +281,7 @@
 			files = (
 				68987F062152DEC900101D23 /* LaunchScreen.storyboard in Resources */,
 				68987F032152DEC900101D23 /* Assets.xcassets in Resources */,
+				68987F392153043D00101D23 /* AlbumTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,11 +344,15 @@
 				68987F162152E06900101D23 /* ViewControllerType.swift in Sources */,
 				68987F182152E08B00101D23 /* ViewModelProtocol.swift in Sources */,
 				68987EF92152DEC800101D23 /* AppDelegate.swift in Sources */,
+				68987F382153043D00101D23 /* AlbumTableViewCell.swift in Sources */,
 				68987F2B2152E7C300101D23 /* AlbumsViewModel.swift in Sources */,
 				68987F1E2152E1C900101D23 /* Result.swift in Sources */,
+				68987F322152F72600101D23 /* Album.swift in Sources */,
+				68987F342152F93900101D23 /* AlbumViewModel.swift in Sources */,
 				68987F202152E27A00101D23 /* GalleryAPI.swift in Sources */,
 				68987F252152E39000101D23 /* APIConstants.swift in Sources */,
 				68987F292152E7B300101D23 /* AlbumsViewController.swift in Sources */,
+				68987F3F215307D600101D23 /* NibFilesNames.swift in Sources */,
 				68987F142152E05800101D23 /* BaseCoordinator.swift in Sources */,
 				68987F012152DEC800101D23 /* SimpleGallery.xcdatamodeld in Sources */,
 				68987F2F2152F15E00101D23 /* AppCoordinator.swift in Sources */,
