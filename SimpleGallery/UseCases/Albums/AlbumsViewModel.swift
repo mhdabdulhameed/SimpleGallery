@@ -13,6 +13,9 @@ final class AlbumsViewModel: ViewModelProtocol {
     // MARK: - ViewModelProtocol Conformance
     
     struct Input {
+        // Call to tell the view model that the view controller has been loaded.
+        let viewDidLoad: AnyObserver<Void>
+        
         /// Call to open an album.
         let selectAlbum: AnyObserver<AlbumViewModel>
         
@@ -22,7 +25,7 @@ final class AlbumsViewModel: ViewModelProtocol {
     
     struct Output {
         /// Emits an array of albums.
-        let albums: Observable<[AlbumViewModel]>
+        var albums: Observable<[AlbumViewModel]>
         
         /// Emits an ID of an album to be shown.
         let showPhotos: Observable<Int>
@@ -40,27 +43,36 @@ final class AlbumsViewModel: ViewModelProtocol {
     // MARK: - Initialization
     
     init(networkManager: NetworkManager = MoyaNetworkManager.shared) {
+        let viewDidLoadSubject = PublishSubject<Void>()
         let selectAlbumSubject = PublishSubject<AlbumViewModel>()
         let reloadSubject = PublishSubject<Void>()
         let albumsSubject = PublishSubject<[AlbumViewModel]>()
         let errorsSubject = PublishSubject<Error>()
         
-        input = Input(selectAlbum: selectAlbumSubject.asObserver(),
+        // Initialize Input and Output of the view model.
+        
+        input = Input(viewDidLoad: viewDidLoadSubject.asObserver(),
+                      selectAlbum: selectAlbumSubject.asObserver(),
                       reload: reloadSubject.asObserver())
+        
         output = Output(albums: albumsSubject.asObservable(),
                         showPhotos: selectAlbumSubject.asObservable().map { $0.id },
                         errorsObservable: errorsSubject.asObservable())
         
-        let result: Observable<Result<[Album]>> = networkManager.startRequest(api: .albums)
-        
-        result.subscribe(onNext: { result in
-            switch result {
-            case .success(let albums):
-                albumsSubject.onNext(albums.map(AlbumViewModel.init))
-            case .failure(let error):
-                errorsSubject.onNext(error)
+        // Merge viewDidLoad and reload, because we want the table view to be reloaded whenever one of them emits.
+
+        Observable.merge([viewDidLoadSubject, reloadSubject])
+            .flatMapLatest { _ -> Observable<Result<[Album]>> in
+                networkManager.startRequest(api: .albums)
             }
-        })
-        .disposed(by: disposeBag)
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(let albums):
+                    albumsSubject.onNext(albums.map(AlbumViewModel.init))
+                case .failure(let error):
+                    errorsSubject.onNext(error)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }

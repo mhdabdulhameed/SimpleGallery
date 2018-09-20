@@ -61,22 +61,36 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
         
         // View Controller UI actions to the View Model
         
+        viewModel.input.viewDidLoad.onNext(())
+        
         refreshControl.rx.controlEvent(.valueChanged)
             .bind(to: viewModel.input.reload)
+            .disposed(by: disposeBag)
+        
+        albumsTableView.rx.modelSelected(AlbumViewModel.self)
+            .do(onNext: { [weak self] _ in
+                if let selectedRowIndexPath = self?.albumsTableView.indexPathForSelectedRow {
+                    self?.albumsTableView.deselectRow(at: selectedRowIndexPath, animated: true)
+                }
+            })
+            .bind(to: viewModel.input.selectAlbum)
             .disposed(by: disposeBag)
     }
     
     // MARK: - Private Methods
     
+    /// Add subviews to the view.
     private func addViews() {
         view.addSubview(albumsTableView)
         setupConstraints()
     }
     
+    /// Setup the constraints of each subview.
     private func setupConstraints() {
         setupAlbumsTableViewConstraints()
     }
     
+    /// Setup the constraints of albumsTableView.
     private func setupAlbumsTableViewConstraints() {
         albumsTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         albumsTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
