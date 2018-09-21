@@ -22,9 +22,9 @@ extension GalleryAPI: TargetType {
     var path: String {
         switch self {
         case .albums:
-            return "albums"
+            return Constants.APIConstants.albums
         case .photos:
-            return "photos"
+            return Constants.APIConstants.photos
         }
     }
     
@@ -41,8 +41,10 @@ extension GalleryAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .albums, .photos:
+        case .albums:
             return .requestPlain
+        case .photos(let albumId):
+            return .requestCompositeParameters(bodyParameters: [:], bodyEncoding: JSONEncoding.default, urlParameters: [Constants.APIConstants.albumId: albumId])
         }
     }
     

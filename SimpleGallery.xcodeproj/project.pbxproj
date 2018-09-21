@@ -29,6 +29,12 @@
 		68987F382153043D00101D23 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F362153043D00101D23 /* AlbumTableViewCell.swift */; };
 		68987F392153043D00101D23 /* AlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68987F372153043D00101D23 /* AlbumTableViewCell.xib */; };
 		68987F3F215307D600101D23 /* NibFilesNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F3E215307D600101D23 /* NibFilesNames.swift */; };
+		68987F9E2155893B00101D23 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987F9D2155893B00101D23 /* Photo.swift */; };
+		68987FA221558E9100101D23 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987FA121558E9100101D23 /* PhotoViewModel.swift */; };
+		68987FA421558E9C00101D23 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987FA321558E9C00101D23 /* PhotosViewController.swift */; };
+		68987FA621558EAA00101D23 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987FA521558EAA00101D23 /* PhotosViewModel.swift */; };
+		68987FAA215594E600101D23 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987FA8215594E600101D23 /* PhotoCollectionViewCell.swift */; };
+		68987FAB215594E600101D23 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68987FA9215594E600101D23 /* PhotoCollectionViewCell.xib */; };
 		DD59DB23C419E2A7B3291CA0 /* Pods_SimpleGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BEB774806AA1EC67090900 /* Pods_SimpleGallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +64,12 @@
 		68987F362153043D00101D23 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
 		68987F372153043D00101D23 /* AlbumTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumTableViewCell.xib; sourceTree = "<group>"; };
 		68987F3E215307D600101D23 /* NibFilesNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibFilesNames.swift; sourceTree = "<group>"; };
+		68987F9D2155893B00101D23 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		68987FA121558E9100101D23 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		68987FA321558E9C00101D23 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		68987FA521558EAA00101D23 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
+		68987FA8215594E600101D23 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		68987FA9215594E600101D23 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		77DD3951E1D17679B48C46C7 /* Pods-SimpleGallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleGallery.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleGallery/Pods-SimpleGallery.release.xcconfig"; sourceTree = "<group>"; };
 		D4BEB774806AA1EC67090900 /* Pods_SimpleGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -146,6 +158,10 @@
 		68987F102152DFF800101D23 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
+				68987FA7215594C800101D23 /* Views */,
+				68987FA521558EAA00101D23 /* PhotosViewModel.swift */,
+				68987FA321558E9C00101D23 /* PhotosViewController.swift */,
+				68987FA121558E9100101D23 /* PhotoViewModel.swift */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -197,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				68987F312152F72600101D23 /* Album.swift */,
+				68987F9D2155893B00101D23 /* Photo.swift */,
 			);
 			path = DomainModels;
 			sourceTree = "<group>";
@@ -206,6 +223,15 @@
 			children = (
 				68987F362153043D00101D23 /* AlbumTableViewCell.swift */,
 				68987F372153043D00101D23 /* AlbumTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		68987FA7215594C800101D23 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				68987FA8215594E600101D23 /* PhotoCollectionViewCell.swift */,
+				68987FA9215594E600101D23 /* PhotoCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68987F062152DEC900101D23 /* LaunchScreen.storyboard in Resources */,
+				68987FAB215594E600101D23 /* PhotoCollectionViewCell.xib in Resources */,
 				68987F032152DEC900101D23 /* Assets.xcassets in Resources */,
 				68987F392153043D00101D23 /* AlbumTableViewCell.xib in Resources */,
 			);
@@ -340,15 +367,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				68987F1C2152E1A300101D23 /* NetworkManager.swift in Sources */,
+				68987FA221558E9100101D23 /* PhotoViewModel.swift in Sources */,
 				68987F272152E40400101D23 /* MoyaNetworkManager.swift in Sources */,
 				68987F162152E06900101D23 /* ViewControllerType.swift in Sources */,
 				68987F182152E08B00101D23 /* ViewModelProtocol.swift in Sources */,
+				68987F9E2155893B00101D23 /* Photo.swift in Sources */,
+				68987FAA215594E600101D23 /* PhotoCollectionViewCell.swift in Sources */,
 				68987EF92152DEC800101D23 /* AppDelegate.swift in Sources */,
 				68987F382153043D00101D23 /* AlbumTableViewCell.swift in Sources */,
 				68987F2B2152E7C300101D23 /* AlbumsViewModel.swift in Sources */,
+				68987FA621558EAA00101D23 /* PhotosViewModel.swift in Sources */,
 				68987F1E2152E1C900101D23 /* Result.swift in Sources */,
 				68987F322152F72600101D23 /* Album.swift in Sources */,
 				68987F342152F93900101D23 /* AlbumViewModel.swift in Sources */,
+				68987FA421558E9C00101D23 /* PhotosViewController.swift in Sources */,
 				68987F202152E27A00101D23 /* GalleryAPI.swift in Sources */,
 				68987F252152E39000101D23 /* APIConstants.swift in Sources */,
 				68987F292152E7B300101D23 /* AlbumsViewController.swift in Sources */,

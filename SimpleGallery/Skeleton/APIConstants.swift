@@ -10,6 +10,11 @@ extension Constants {
     struct APIConstants {
         static let baseURL = "https://jsonplaceholder.typicode.com/"
         
+        static let albums = "albums"
+        static let photos = "photos"
+        
+        static let albumId = "albumId"
+        
         private init() { }
     }
 }
