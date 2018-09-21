@@ -61,6 +61,10 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         
         // View Model outputs to the View Controller
         
+        viewModel.output.title
+            .bind(to: navigationItem.rx.title)
+            .disposed(by: disposeBag)
+        
         viewModel.output.photos
             .observeOn(MainScheduler.instance)
             .do(onNext: { [weak self] _ in self?.refreshControl.endRefreshing() })

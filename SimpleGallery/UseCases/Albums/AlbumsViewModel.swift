@@ -28,7 +28,7 @@ final class AlbumsViewModel: ViewModelProtocol {
         var albums: Observable<[AlbumViewModel]>
         
         /// Emits an ID of an album to be shown.
-        let showPhotos: Observable<Int>
+        let showPhotos: Observable<(albumId: Int, albumTitle: String)>
         
         /// Emits an error to be shown.
         let errorsObservable: Observable<Error>
@@ -56,7 +56,7 @@ final class AlbumsViewModel: ViewModelProtocol {
                       reload: reloadSubject.asObserver())
         
         output = Output(albums: albumsSubject.asObservable(),
-                        showPhotos: selectAlbumSubject.asObservable().map { $0.id },
+                        showPhotos: selectAlbumSubject.asObservable().map { ($0.id, $0.title) },
                         errorsObservable: errorsSubject.asObservable())
         
         // Merge viewDidLoad and reload, because we want the table view to be loaded whenever one of them emits.

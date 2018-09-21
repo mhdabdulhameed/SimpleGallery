@@ -24,9 +24,9 @@ final class AlbumsCoordinator: BaseCoordinator<Void> {
         let navigationController = UINavigationController(rootViewController: viewController)
         
         viewModel.output.showPhotos
-            .flatMapLatest { [weak self, navigationController]id -> Observable<Void> in
+            .flatMapLatest { [weak self, navigationController] album -> Observable<Void> in
                 guard let strongSelf = self else { return .empty() }
-                return strongSelf.showPhoto(ofAlbum: id, in: navigationController)
+                return strongSelf.showPhoto(of: album.albumId, and: album.albumTitle, in: navigationController)
             }
             .subscribe()
             .disposed(by: disposeBag)
@@ -37,8 +37,8 @@ final class AlbumsCoordinator: BaseCoordinator<Void> {
         return Observable.never()
     }
     
-    func showPhoto(ofAlbum id: Int, in navigationController: UINavigationController) -> Observable<Void> {
-        let photosCoordinator = PhotosCoordinator(navigationController: navigationController, albumId: id)
+    func showPhoto(of albumId: Int, and albumTitle: String, in navigationController: UINavigationController) -> Observable<Void> {
+        let photosCoordinator = PhotosCoordinator(navigationController: navigationController, albumId: albumId, albumTitle: albumTitle)
         return coordinate(to: photosCoordinator)
     }
 }

@@ -24,6 +24,9 @@ final class PhotosViewModel: ViewModelProtocol {
     }
     
     struct Output {
+        /// Emits the title of the album.
+        var title: Observable<String>
+        
         /// Emits an array of photos.
         var photos: Observable<[PhotoViewModel]>
         
@@ -43,8 +46,9 @@ final class PhotosViewModel: ViewModelProtocol {
     
     // MARK: - Initialization
     
-    init(albumId: Int, networkManager: NetworkManager = MoyaNetworkManager.shared) {
+    init(albumId: Int, albumTitle: String, networkManager: NetworkManager = MoyaNetworkManager.shared) {
         self.albumId = albumId
+        let titleSubject = BehaviorSubject<String>(value: albumTitle)
         let viewDidLoadSubject = PublishSubject<Void>()
         let selectPhotoSubject = PublishSubject<PhotoViewModel>()
         let reloadSubject = PublishSubject<Void>()
@@ -57,7 +61,8 @@ final class PhotosViewModel: ViewModelProtocol {
                       selectPhoto: selectPhotoSubject.asObserver(),
                       reload: reloadSubject.asObserver())
         
-        output = Output(photos: photosSubject.asObservable(),
+        output = Output(title: titleSubject.asObservable().map { $0 },
+                        photos: photosSubject.asObservable(),
                         showPhoto: selectPhotoSubject.asObservable().map { $0.url },
                         errorsObservable: errorsSubject.asObservable())
         
