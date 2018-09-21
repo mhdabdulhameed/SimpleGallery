@@ -6,17 +6,19 @@
 //  Copyright © 2018 Mohamed Abdul-Hameed. All rights reserved.
 //
 
+import Foundation
+
 struct PhotoViewModel {
     let id: Int
     let title: String
-    let url: String
-    let thumbnailUrl: String
+    let url: URL
+    let thumbnailUrl: URL
     
     init(photo: Photo) {
         id = photo.id
         title = photo.title
-        url = photo.url
-        thumbnailUrl = photo.thumbnailUrl
+        url = URL(string: photo.url)!
+        thumbnailUrl = URL(string: photo.thumbnailUrl)!
     }
 }
 

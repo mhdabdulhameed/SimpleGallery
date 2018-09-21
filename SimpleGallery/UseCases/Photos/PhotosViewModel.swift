@@ -27,8 +27,8 @@ final class PhotosViewModel: ViewModelProtocol {
         /// Emits an array of photos.
         var photos: Observable<[PhotoViewModel]>
         
-        /// Emits an ID of an album to be shown.
-        let showPhoto: Observable<Int>
+        /// Emits the URL of photo to be shown.
+        let showPhoto: Observable<URL>
         
         /// Emits an error to be shown.
         let errorsObservable: Observable<Error>
@@ -58,7 +58,7 @@ final class PhotosViewModel: ViewModelProtocol {
                       reload: reloadSubject.asObserver())
         
         output = Output(photos: photosSubject.asObservable(),
-                        showPhoto: selectPhotoSubject.asObservable().map { $0.id },
+                        showPhoto: selectPhotoSubject.asObservable().map { $0.url },
                         errorsObservable: errorsSubject.asObservable())
         
         // Merge viewDidLoad and reload, because we want the collection view to be loaded whenever one of them emits.
