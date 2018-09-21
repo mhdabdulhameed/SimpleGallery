@@ -59,7 +59,7 @@ final class AlbumsViewModel: ViewModelProtocol {
                         showPhotos: selectAlbumSubject.asObservable().map { $0.id },
                         errorsObservable: errorsSubject.asObservable())
         
-        // Merge viewDidLoad and reload, because we want the table view to be reloaded whenever one of them emits.
+        // Merge viewDidLoad and reload, because we want the table view to be loaded whenever one of them emits.
 
         Observable.merge([viewDidLoadSubject, reloadSubject])
             .flatMapLatest { _ -> Observable<Result<[Album]>> in

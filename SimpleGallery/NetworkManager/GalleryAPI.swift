@@ -10,7 +10,7 @@ import Moya
 
 enum GalleryAPI {
     case albums
-    case photos(albumID: Int)
+    case photos(albumId: Int)
 }
 
 extension GalleryAPI: TargetType {

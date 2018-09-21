@@ -47,6 +47,32 @@ final class PhotosViewController: UIViewController, ViewControllerType {
     
     func configure(with viewModel: PhotosViewModel) {
         
+        // View Model outputs to the View Controller
+        
+        viewModel.output.photos
+            .observeOn(MainScheduler.instance)
+            .do(onNext: { [weak self] _ in self?.refreshControl.endRefreshing() })
+            .bind(to: photosCollectionView.rx.items(cellIdentifier: PhotoCollectionViewCell.reuseIdentifier, cellType: PhotoCollectionViewCell.self)) { _, item, cell in
+                cell.configure(with: item)
+            }
+            .disposed(by: disposeBag)
+        
+        // View Controller UI actions to the View Model
+        
+        viewModel.input.viewDidLoad.onNext(())
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .bind(to: viewModel.input.reload)
+            .disposed(by: disposeBag)
+        
+        photosCollectionView.rx.modelSelected(PhotoViewModel.self)
+            .do(onNext: { [weak self] _ in
+                if let selectedItemIndexPath = self?.photosCollectionView.indexPathsForSelectedItems?.first {
+                    self?.photosCollectionView.deselectItem(at: selectedItemIndexPath, animated: true)
+                }
+            })
+            .bind(to: viewModel.input.selectPhoto)
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Private Methods

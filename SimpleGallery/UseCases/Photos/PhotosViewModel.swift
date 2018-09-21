@@ -38,11 +38,13 @@ final class PhotosViewModel: ViewModelProtocol {
     
     let input: Input
     let output: Output
+    private let albumId: Int
     private let disposeBag = DisposeBag()
     
     // MARK: - Initialization
     
-    init(networkManager: NetworkManager = MoyaNetworkManager.shared) {
+    init(albumId: Int, networkManager: NetworkManager = MoyaNetworkManager.shared) {
+        self.albumId = albumId
         let viewDidLoadSubject = PublishSubject<Void>()
         let selectPhotoSubject = PublishSubject<PhotoViewModel>()
         let reloadSubject = PublishSubject<Void>()
@@ -59,8 +61,20 @@ final class PhotosViewModel: ViewModelProtocol {
                         showPhoto: selectPhotoSubject.asObservable().map { $0.id },
                         errorsObservable: errorsSubject.asObservable())
         
-        // Merge viewDidLoad and reload, because we want the table view to be reloaded whenever one of them emits.
+        // Merge viewDidLoad and reload, because we want the collection view to be loaded whenever one of them emits.
         
-        
+        Observable.merge([viewDidLoadSubject, reloadSubject])
+            .flatMapLatest { [albumId] _ -> Observable<Result<[Photo]>> in
+                networkManager.startRequest(api: .photos(albumId: albumId))
+            }
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(let photos):
+                    photosSubject.onNext(photos.map(PhotoViewModel.init))
+                case .failure(let error):
+                    errorsSubject.onNext(error)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
