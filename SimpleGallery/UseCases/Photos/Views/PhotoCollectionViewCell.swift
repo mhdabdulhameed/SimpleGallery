@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     
-    static let reuseIdentifier = String(describing: AlbumTableViewCell.self)
+    static let reuseIdentifier = String(describing: PhotoCollectionViewCell.self)
     
     // MARK: - IBOutlets
     
@@ -19,6 +19,11 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     // MARK: - Methods
     
     func configure(with photoViewModel: PhotoViewModel) {
-//        photoViewModel.thumbnailUrl
+        SDWebImageHelper.setImage(for: thumbnailImageView, from: photoViewModel.url) { [weak self] in
+            self?.thumbnailImageView.alpha = 0
+            UIView.animate(withDuration: 1.0) {
+                self?.thumbnailImageView.alpha = 1
+            }
+        }
     }
 }

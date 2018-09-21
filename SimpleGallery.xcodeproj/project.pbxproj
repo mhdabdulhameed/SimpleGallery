@@ -35,6 +35,8 @@
 		68987FA621558EAA00101D23 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987FA521558EAA00101D23 /* PhotosViewModel.swift */; };
 		68987FAA215594E600101D23 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987FA8215594E600101D23 /* PhotoCollectionViewCell.swift */; };
 		68987FAB215594E600101D23 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68987FA9215594E600101D23 /* PhotoCollectionViewCell.xib */; };
+		68987FAE21559FDB00101D23 /* SDWebImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987FAD21559FDB00101D23 /* SDWebImageHelper.swift */; };
+		68987FB52155AF6800101D23 /* PhotosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987FB42155AF6800101D23 /* PhotosCoordinator.swift */; };
 		DD59DB23C419E2A7B3291CA0 /* Pods_SimpleGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BEB774806AA1EC67090900 /* Pods_SimpleGallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,8 @@
 		68987FA521558EAA00101D23 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
 		68987FA8215594E600101D23 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		68987FA9215594E600101D23 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		68987FAD21559FDB00101D23 /* SDWebImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImageHelper.swift; sourceTree = "<group>"; };
+		68987FB42155AF6800101D23 /* PhotosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCoordinator.swift; sourceTree = "<group>"; };
 		77DD3951E1D17679B48C46C7 /* Pods-SimpleGallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleGallery.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleGallery/Pods-SimpleGallery.release.xcconfig"; sourceTree = "<group>"; };
 		D4BEB774806AA1EC67090900 /* Pods_SimpleGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -115,10 +119,12 @@
 		68987EF72152DEC800101D23 /* SimpleGallery */ = {
 			isa = PBXGroup;
 			children = (
+				68987FB12155AC3700101D23 /* Utils */,
 				68987F302152F71800101D23 /* DomainModels */,
 				68987F212152E35B00101D23 /* Skeleton */,
 				68987F192152E18100101D23 /* NetworkManager */,
 				68987F122152E04300101D23 /* BaseLayer */,
+				68987FAC21559FC600101D23 /* Helpers */,
 				68987F0E2152DFE900101D23 /* UseCases */,
 				68987F0D2152DF6E00101D23 /* App */,
 				68987F022152DEC900101D23 /* Assets.xcassets */,
@@ -159,9 +165,10 @@
 			isa = PBXGroup;
 			children = (
 				68987FA7215594C800101D23 /* Views */,
+				68987FB02155A2E800101D23 /* SubViewModels */,
+				68987FB42155AF6800101D23 /* PhotosCoordinator.swift */,
 				68987FA521558EAA00101D23 /* PhotosViewModel.swift */,
 				68987FA321558E9C00101D23 /* PhotosViewController.swift */,
-				68987FA121558E9100101D23 /* PhotoViewModel.swift */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -170,10 +177,10 @@
 			isa = PBXGroup;
 			children = (
 				68987F352153042100101D23 /* Views */,
+				68987FAF2155A2D700101D23 /* SubViewModels */,
 				68987F2C2152E7D200101D23 /* AlbumsCoordinator.swift */,
 				68987F2A2152E7C300101D23 /* AlbumsViewModel.swift */,
 				68987F282152E7B300101D23 /* AlbumsViewController.swift */,
-				68987F332152F93900101D23 /* AlbumViewModel.swift */,
 			);
 			path = Albums;
 			sourceTree = "<group>";
@@ -234,6 +241,37 @@
 				68987FA9215594E600101D23 /* PhotoCollectionViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		68987FAC21559FC600101D23 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				68987FAD21559FDB00101D23 /* SDWebImageHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		68987FAF2155A2D700101D23 /* SubViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				68987F332152F93900101D23 /* AlbumViewModel.swift */,
+			);
+			path = SubViewModels;
+			sourceTree = "<group>";
+		};
+		68987FB02155A2E800101D23 /* SubViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				68987FA121558E9100101D23 /* PhotoViewModel.swift */,
+			);
+			path = SubViewModels;
+			sourceTree = "<group>";
+		};
+		68987FB12155AC3700101D23 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		7C7EA783D72D368C350951AB /* Pods */ = {
@@ -327,6 +365,7 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -335,6 +374,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -387,9 +427,11 @@
 				68987F3F215307D600101D23 /* NibFilesNames.swift in Sources */,
 				68987F142152E05800101D23 /* BaseCoordinator.swift in Sources */,
 				68987F012152DEC800101D23 /* SimpleGallery.xcdatamodeld in Sources */,
+				68987FAE21559FDB00101D23 /* SDWebImageHelper.swift in Sources */,
 				68987F2F2152F15E00101D23 /* AppCoordinator.swift in Sources */,
 				68987F2D2152E7D200101D23 /* AlbumsCoordinator.swift in Sources */,
 				68987F232152E36E00101D23 /* Constants.swift in Sources */,
+				68987FB52155AF6800101D23 /* PhotosCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

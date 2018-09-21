@@ -13,5 +13,6 @@ pod 'RxCocoa'
 
 # Networking
 pod 'Moya/RxSwift'
+pod 'SDWebImage'
 
 end

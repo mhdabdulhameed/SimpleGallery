@@ -32,7 +32,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
-                <outlet property="thumbnailImageView" destination="AaS-cV-Q1Z" id="Epz-Lu-wi1"/>
+                <outlet property="thumbnailImageView" destination="AaS-cV-Q1Z" id="hsC-Xz-yc7"/>
             </connections>
         </collectionViewCell>
     </objects>

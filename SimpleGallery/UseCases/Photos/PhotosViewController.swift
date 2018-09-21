@@ -24,11 +24,15 @@ final class PhotosViewController: UIViewController, ViewControllerType {
     }()
     
     private lazy var photosCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier)
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 1.0
+        flowLayout.minimumInteritemSpacing = 1.0
+        flowLayout.itemSize = UIDevice.current.orientation.isPortrait ? CGSize(width: view.frame.width / 4 - 1, height: view.frame.width / 4 - 1) : CGSize(width: view.frame.width / 6 - 1, height: view.frame.width / 6 - 1)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.register(UINib(nibName: Constants.NibFilesNames.photoCollectionViewCell, bundle: nil),
+                                forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor=UIColor.white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
         return collectionView
     }()
     
@@ -41,6 +45,14 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         
         configure(with: viewModel)
         addViews()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        if let flowLayout = photosCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.itemSize = UIDevice.current.orientation.isPortrait ? CGSize(width: size.width / 4 - 1, height: size.width / 4 - 1) : CGSize(width: size.width / 6 - 1, height: size.width / 6 - 1)
+        }
     }
     
     // MARK: - ViewControllerType Conformation
