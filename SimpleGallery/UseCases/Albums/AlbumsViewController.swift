@@ -30,6 +30,8 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
         tableView.insertSubview(refreshControl, at: 0)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.cellLayoutMarginsFollowReadableWidth = false
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
         return tableView
     }()
     

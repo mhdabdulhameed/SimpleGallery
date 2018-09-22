@@ -19,13 +19,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evL-dZ-vDO">
-                        <rect key="frame" x="64" y="22" width="246" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evL-dZ-vDO">
+                        <rect key="frame" x="64" y="5" width="246" height="54.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="500" constant="50" id="PRW-Qh-dfO"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t12-i3-MmJ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="albumCover" translatesAutoresizingMaskIntoConstraints="NO" id="t12-i3-MmJ">
                         <rect key="frame" x="10" y="10.5" width="44" height="44"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="3bc-Pa-pJI"/>
@@ -37,8 +40,9 @@
                     <constraint firstAttribute="trailing" secondItem="evL-dZ-vDO" secondAttribute="trailing" constant="10" id="1TO-jA-MNb"/>
                     <constraint firstItem="evL-dZ-vDO" firstAttribute="leading" secondItem="t12-i3-MmJ" secondAttribute="trailing" constant="10" id="5A5-qc-1PL"/>
                     <constraint firstItem="t12-i3-MmJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="BpQ-tg-8WU"/>
+                    <constraint firstItem="evL-dZ-vDO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="EJj-RP-2eE"/>
+                    <constraint firstAttribute="bottom" secondItem="evL-dZ-vDO" secondAttribute="bottom" constant="5" id="Kqy-zd-d7O"/>
                     <constraint firstItem="t12-i3-MmJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="baC-tq-YB6"/>
-                    <constraint firstItem="evL-dZ-vDO" firstAttribute="centerY" secondItem="t12-i3-MmJ" secondAttribute="centerY" id="zeZ-Gv-bQS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -49,4 +53,7 @@
             <point key="canvasLocation" x="40" y="84.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="albumCover" width="639" height="640"/>
+    </resources>
 </document>
