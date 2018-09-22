@@ -56,13 +56,13 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         addViews()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         if let flowLayout = photosCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.itemSize = UIKitUtils.isPortrait() ?
-                CGSize(width: size.width / 4 - 1, height: size.width / 4 - 1) :
-                CGSize(width: size.width / 6 - 1, height: size.width / 6 - 1)
+                CGSize(width: view.frame.width / 4 - 1, height: view.frame.width / 4 - 1) :
+                CGSize(width: view.frame.width / 6 - 1, height: view.frame.width / 6 - 1)
         }
     }
     

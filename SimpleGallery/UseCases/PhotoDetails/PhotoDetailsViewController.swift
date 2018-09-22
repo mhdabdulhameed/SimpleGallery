@@ -47,7 +47,17 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        photoImageView.frame = CGRect(x: (view.bounds.width - 250) / 2, y: 140, width: 250, height: view.bounds.height - 280)
+        if UIKitUtils.isPortrait() {
+            photoImageView.frame = CGRect(x: (view.bounds.width - 250) / 2,
+                                          y: 140,
+                                          width: 250,
+                                          height: view.bounds.height - 280)
+        } else {
+            photoImageView.frame = CGRect(x: 140,
+                                          y: (view.bounds.height - 250) / 2,
+                                          width: view.bounds.width - 280,
+                                          height: 250)
+        }
     }
     
     // MARK: - ViewControllerType Conformation
