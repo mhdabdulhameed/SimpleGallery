@@ -29,6 +29,7 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
                            forCellReuseIdentifier: AlbumTableViewCell.reuseIdentifier)
         tableView.insertSubview(refreshControl, at: 0)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         return tableView
     }()
     
@@ -83,6 +84,7 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
     private func addViews() {
         view.addSubview(albumsTableView)
         setupConstraints()
+        view.layoutIfNeeded()
     }
     
     /// Setup the constraints of each subview.

@@ -21,7 +21,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     func configure(with photoViewModel: PhotoViewModel) {
         SDWebImageHelper.setImage(for: thumbnailImageView, from: photoViewModel.url) { [weak self] in
             self?.thumbnailImageView.alpha = 0
-            UIView.animate(withDuration: 1.0) {
+            UIView.animate(withDuration: 0.5) {
                 self?.thumbnailImageView.alpha = 1
             }
         }

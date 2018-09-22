@@ -78,6 +78,7 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     private func addViews() {
         view.addSubview(photoImageView)
         setupConstraints()
+        view.layoutIfNeeded()
     }
     
     private func setupConstraints() {

@@ -33,7 +33,14 @@ final class PhotosViewController: UIViewController, ViewControllerType {
                                 forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier)
         collectionView.backgroundColor=UIColor.white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.addSubview(activityIndicator)
         return collectionView
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
     }()
     
     // MARK: - Life Cycle
@@ -41,7 +48,7 @@ final class PhotosViewController: UIViewController, ViewControllerType {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshControl.sendActions(for: .valueChanged)
+        activityIndicator.startAnimating()
         
         configure(with: viewModel)
         addViews()
@@ -67,7 +74,7 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         
         viewModel.output.photos
             .observeOn(MainScheduler.instance)
-            .do(onNext: { [weak self] _ in self?.refreshControl.endRefreshing() })
+            .do(onNext: { [weak self] _ in self?.activityIndicator.stopAnimating() })
             .bind(to: photosCollectionView.rx.items(cellIdentifier: PhotoCollectionViewCell.reuseIdentifier, cellType: PhotoCollectionViewCell.self)) { _, item, cell in
                 cell.configure(with: item)
             }
@@ -97,6 +104,9 @@ final class PhotosViewController: UIViewController, ViewControllerType {
     private func addViews() {
         view.addSubview(photosCollectionView)
         setupConstraints()
+        view.layoutIfNeeded()
+        activityIndicator.center = CGPoint(x: photosCollectionView.frame.width / 2,
+                                           y: activityIndicator.frame.height / 2 + 5)
     }
     
     /// Setup the constraints of each subview.
