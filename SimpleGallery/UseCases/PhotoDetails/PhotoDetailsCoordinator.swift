@@ -25,6 +25,7 @@ final class PhotoDetailsCoordinator: BaseCoordinator<Void> {
         let navigationController = UINavigationController(rootViewController: photoDetailsViewController)
         let photoDetailsViewModel = PhotoDetailsViewModel(photo: photo)
         photoDetailsViewController.viewModel = photoDetailsViewModel
+        photoDetailsViewController.alertManager = DefaultAlertManager.shared
         rootViewController.present(navigationController, animated: true)
         return Observable.just(())
     }

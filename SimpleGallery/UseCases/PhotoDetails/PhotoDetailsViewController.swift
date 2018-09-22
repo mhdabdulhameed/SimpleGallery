@@ -16,6 +16,7 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     // MARK: - Properties
     
     var viewModel: PhotoDetailsViewModel!
+    var alertManager: AlertManager!
     
     private let disposeBag = DisposeBag()
     
