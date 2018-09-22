@@ -89,9 +89,11 @@ final class PhotosViewController: UIViewController, ViewControllerType {
             .disposed(by: disposeBag)
         
         photosCollectionView.rx.modelSelected(PhotoViewModel.self)
-            .do(onNext: { [weak self] _ in
+            .do(onNext: { [weak self] photoViewModel in
                 if let selectedItemIndexPath = self?.photosCollectionView.indexPathsForSelectedItems?.first {
                     self?.photosCollectionView.deselectItem(at: selectedItemIndexPath, animated: true)
+//                    heroId = selectedItemIndexPath.item
+                    self?.photosCollectionView.cellForItem(at: selectedItemIndexPath)?.hero.id = String(photoViewModel.id) // String(heroId)
                 }
             })
             .bind(to: viewModel.input.selectPhoto)

@@ -22,11 +22,11 @@ final class PhotoDetailsCoordinator: BaseCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         let photoDetailsViewController = PhotoDetailsViewController()
-        let navigationController = UINavigationController(rootViewController: photoDetailsViewController)
+//        let navigationController = UINavigationController(rootViewController: photoDetailsViewController)
         let photoDetailsViewModel = PhotoDetailsViewModel(photo: photo)
         photoDetailsViewController.viewModel = photoDetailsViewModel
         photoDetailsViewController.alertManager = DefaultAlertManager.shared
-        rootViewController.present(navigationController, animated: true)
+        rootViewController.present(photoDetailsViewController, animated: true)
         return Observable.just(())
     }
 }

@@ -15,4 +15,7 @@ pod 'RxCocoa'
 pod 'Moya/RxSwift'
 pod 'SDWebImage'
 
+# Animations
+pod 'Hero'
+
 end

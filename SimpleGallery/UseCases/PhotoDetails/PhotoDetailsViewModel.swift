@@ -20,6 +20,9 @@ final class PhotoDetailsViewModel: ViewModelProtocol {
         /// Emits the title of the photo.
         var title: Observable<String>
         
+        // Emits the id of the photo.
+        var photoId: Observable<String>
+        
         /// Emits the URL of the photo.
         var photoUrl: Observable<URL>
         
@@ -39,6 +42,7 @@ final class PhotoDetailsViewModel: ViewModelProtocol {
     init(networkManager: NetworkManager = MoyaNetworkManager.shared, photo: PhotoViewModel) {
         self.photo = photo
         let titleSubject = BehaviorSubject<String>(value: photo.title)
+        let photoIdSubject = BehaviorSubject<String>(value: String(photo.id))
         let photoUrlSubject = BehaviorSubject<URL>(value: photo.url)
         let errorsSubject = PublishSubject<Error>()
         
@@ -47,6 +51,7 @@ final class PhotoDetailsViewModel: ViewModelProtocol {
         input = Input()
         
         output = Output(title: titleSubject.asObservable(),
+                        photoId: photoIdSubject.asObservable(),
                         photoUrl: photoUrlSubject.asObservable(),
                         errorsObservable: errorsSubject.asObservable())
     }

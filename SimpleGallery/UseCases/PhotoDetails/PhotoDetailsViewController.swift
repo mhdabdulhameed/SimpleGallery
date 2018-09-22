@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Hero
 
 final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     typealias ViewModelType = PhotoDetailsViewModel
@@ -20,18 +21,11 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     
     private let disposeBag = DisposeBag()
     
-    private lazy var doneBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(title: "Done", style: .plain, target: nil, action: nil)
-    }()
-    
-    private lazy var analyzeBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(title: "Analyze", style: .plain, target: nil, action: nil)
-    }()
-    
     private lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .black
+        imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 8
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -41,17 +35,19 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = doneBarButtonItem
-        navigationItem.rightBarButtonItem = analyzeBarButtonItem
+        view.backgroundColor = .white
+        hero.isEnabled = true
         
-        doneBarButtonItem.rx.tap
-            .subscribe { [weak self] _ in
-                self?.dismiss(animated: true)
-            }
-            .disposed(by: disposeBag)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap)))
         
         configure(with: viewModel)
         addViews()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        photoImageView.frame = CGRect(x: (view.bounds.width - 250) / 2, y: 140, width: 250, height: view.bounds.height - 280)
     }
     
     // MARK: - ViewControllerType Conformation
@@ -60,8 +56,10 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
         
         // View Model outputs to the View Controller
         
-        viewModel.output.title
-            .bind(to: navigationItem.rx.title)
+        viewModel.output.photoId
+            .subscribe(onNext: { [photoImageView] photoId in
+                photoImageView.hero.id = photoId
+            })
             .disposed(by: disposeBag)
         
         viewModel.output.photoUrl
@@ -78,18 +76,9 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     /// Add subviews to the view.
     private func addViews() {
         view.addSubview(photoImageView)
-        setupConstraints()
-        view.layoutIfNeeded()
     }
     
-    private func setupConstraints() {
-        setupPhotoImageViewConstraints()
-    }
-    
-    private func setupPhotoImageViewConstraints() {
-        photoImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        photoImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        photoImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        photoImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    @objc func onTap() {
+        dismiss(animated: true)
     }
 }
