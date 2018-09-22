@@ -26,6 +26,20 @@ final class PhotosCoordinator: BaseCoordinator<Void> {
         let viewModel = PhotosViewModel(albumId: albumId, albumTitle: albumTitle)
         photosViewController.viewModel = viewModel
         navigationController.pushViewController(photosViewController, animated: true)
+        
+        viewModel.output.showPhoto
+            .subscribe(onNext: { [showPhoto, navigationController] url in
+                showPhoto(url, navigationController)
+            })
+            .disposed(by: disposeBag)
+        
         return Observable.just(())
+    }
+    
+    private func showPhoto(by url: URL, in navigationController: UINavigationController) {
+        let photoDetailsViewController = PhotoDetailsViewController()
+        let viewModel = PhotoDetailsViewModel()
+        photoDetailsViewController.viewModel = viewModel
+        navigationController.present(photoDetailsViewController, animated: true)
     }
 }

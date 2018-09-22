@@ -161,8 +161,8 @@
 		68987F0F2152DFF000101D23 /* PhotoDetails */ = {
 			isa = PBXGroup;
 			children = (
-				68987FB62155B67500101D23 /* PhotoDetailsViewController.swift */,
 				68987FB82155B68500101D23 /* PhotoDetailsViewModel.swift */,
+				68987FB62155B67500101D23 /* PhotoDetailsViewController.swift */,
 			);
 			path = PhotoDetails;
 			sourceTree = "<group>";

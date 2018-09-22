@@ -61,7 +61,7 @@ final class PhotosViewModel: ViewModelProtocol {
                       selectPhoto: selectPhotoSubject.asObserver(),
                       reload: reloadSubject.asObserver())
         
-        output = Output(title: titleSubject.asObservable().map { $0 },
+        output = Output(title: titleSubject.asObservable(),
                         photos: photosSubject.asObservable(),
                         showPhoto: selectPhotoSubject.asObservable().map { $0.url },
                         errorsObservable: errorsSubject.asObservable())

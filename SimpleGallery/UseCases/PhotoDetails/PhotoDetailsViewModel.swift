@@ -6,4 +6,17 @@
 //  Copyright © 2018 Mohamed Abdul-Hameed. All rights reserved.
 //
 
-import Foundation
+import RxSwift
+
+final class PhotoDetailsViewModel: ViewModelProtocol {
+    
+    // MARK: - ViewModelProtocol Conformance
+    
+    struct Input {
+        
+    }
+    
+    struct Output {
+        
+    }
+}
