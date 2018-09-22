@@ -19,9 +19,18 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     
     private let disposeBag = DisposeBag()
     
+    private lazy var doneBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: "Done", style: .plain, target: nil, action: nil)
+    }()
+    
+    private lazy var analyzeBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: "Analyze", style: .plain, target: nil, action: nil)
+    }()
+    
     private lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .red
+        imageView.backgroundColor = .black
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -31,6 +40,15 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = doneBarButtonItem
+        navigationItem.rightBarButtonItem = analyzeBarButtonItem
+        
+        doneBarButtonItem.rx.tap
+            .subscribe { [weak self] _ in
+                self?.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
         configure(with: viewModel)
         addViews()
     }
@@ -39,6 +57,19 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     
     func configure(with viewModel: PhotoDetailsViewModel) {
         
+        // View Model outputs to the View Controller
+        
+        viewModel.output.title
+            .bind(to: navigationItem.rx.title)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.photoUrl
+            .subscribe(onNext: { [photoImageView] url in
+                SDWebImageHelper.setImage(for: photoImageView, from: url)
+            })
+            .disposed(by: disposeBag)
+        
+        // View Controller UI actions to the View Model
     }
     
     // MARK: - Private Methods

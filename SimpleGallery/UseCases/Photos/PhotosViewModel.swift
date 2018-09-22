@@ -31,7 +31,7 @@ final class PhotosViewModel: ViewModelProtocol {
         var photos: Observable<[PhotoViewModel]>
         
         /// Emits the URL of photo to be shown.
-        let showPhoto: Observable<URL>
+        let showPhoto: Observable<PhotoViewModel>
         
         /// Emits an error to be shown.
         let errorsObservable: Observable<Error>
@@ -63,7 +63,7 @@ final class PhotosViewModel: ViewModelProtocol {
         
         output = Output(title: titleSubject.asObservable(),
                         photos: photosSubject.asObservable(),
-                        showPhoto: selectPhotoSubject.asObservable().map { $0.url },
+                        showPhoto: selectPhotoSubject.asObservable().map { $0 },
                         errorsObservable: errorsSubject.asObservable())
         
         // Merge viewDidLoad and reload, because we want the collection view to be loaded whenever one of them emits.

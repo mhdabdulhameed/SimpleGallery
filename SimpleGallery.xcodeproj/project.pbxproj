@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6866A8B02156212B0017223C /* PhotoDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6866A8AF2156212B0017223C /* PhotoDetailsCoordinator.swift */; };
 		68987EF92152DEC800101D23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987EF82152DEC800101D23 /* AppDelegate.swift */; };
 		68987F012152DEC800101D23 /* SimpleGallery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68987EFF2152DEC800101D23 /* SimpleGallery.xcdatamodeld */; };
 		68987F032152DEC900101D23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68987F022152DEC900101D23 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		143CA781B4CCA909DA04797D /* Pods-SimpleGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleGallery.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleGallery/Pods-SimpleGallery.debug.xcconfig"; sourceTree = "<group>"; };
+		6866A8AF2156212B0017223C /* PhotoDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsCoordinator.swift; sourceTree = "<group>"; };
 		68987EF52152DEC800101D23 /* SimpleGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68987EF82152DEC800101D23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68987F002152DEC800101D23 /* SimpleGallery.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleGallery.xcdatamodel; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		68987F0F2152DFF000101D23 /* PhotoDetails */ = {
 			isa = PBXGroup;
 			children = (
+				6866A8AF2156212B0017223C /* PhotoDetailsCoordinator.swift */,
 				68987FB82155B68500101D23 /* PhotoDetailsViewModel.swift */,
 				68987FB62155B67500101D23 /* PhotoDetailsViewController.swift */,
 			);
@@ -419,6 +422,7 @@
 				68987F182152E08B00101D23 /* ViewModelProtocol.swift in Sources */,
 				68987FB72155B67500101D23 /* PhotoDetailsViewController.swift in Sources */,
 				68987F9E2155893B00101D23 /* Photo.swift in Sources */,
+				6866A8B02156212B0017223C /* PhotoDetailsCoordinator.swift in Sources */,
 				68987FAA215594E600101D23 /* PhotoCollectionViewCell.swift in Sources */,
 				68987EF92152DEC800101D23 /* AppDelegate.swift in Sources */,
 				68987F382153043D00101D23 /* AlbumTableViewCell.swift in Sources */,

@@ -17,6 +17,37 @@ final class PhotoDetailsViewModel: ViewModelProtocol {
     }
     
     struct Output {
+        /// Emits the title of the photo.
+        var title: Observable<String>
         
+        /// Emits the URL of the photo.
+        var photoUrl: Observable<URL>
+        
+        /// Emits an error to be shown.
+        let errorsObservable: Observable<Error>
+    }
+    
+    // MARK: - Properties
+    
+    let input: Input
+    let output: Output
+    private let photo: PhotoViewModel
+    private let disposeBag = DisposeBag()
+    
+    // MARK: - Initialization
+    
+    init(networkManager: NetworkManager = MoyaNetworkManager.shared, photo: PhotoViewModel) {
+        self.photo = photo
+        let titleSubject = BehaviorSubject<String>(value: photo.title)
+        let photoUrlSubject = BehaviorSubject<URL>(value: photo.url)
+        let errorsSubject = PublishSubject<Error>()
+        
+        // Initialize Input and Output of the view model.
+        
+        input = Input()
+        
+        output = Output(title: titleSubject.asObservable(),
+                        photoUrl: photoUrlSubject.asObservable(),
+                        errorsObservable: errorsSubject.asObservable())
     }
 }

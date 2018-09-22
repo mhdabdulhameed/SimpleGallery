@@ -28,18 +28,17 @@ final class PhotosCoordinator: BaseCoordinator<Void> {
         navigationController.pushViewController(photosViewController, animated: true)
         
         viewModel.output.showPhoto
-            .subscribe(onNext: { [showPhoto, navigationController] url in
-                showPhoto(url, navigationController)
-            })
+            .flatMapLatest { [showPhoto, navigationController] photo -> Observable<Void> in
+                showPhoto(photo, navigationController)
+        }
+            .subscribe()
             .disposed(by: disposeBag)
         
         return Observable.just(())
     }
     
-    private func showPhoto(by url: URL, in navigationController: UINavigationController) {
-        let photoDetailsViewController = PhotoDetailsViewController()
-        let viewModel = PhotoDetailsViewModel()
-        photoDetailsViewController.viewModel = viewModel
-        navigationController.present(photoDetailsViewController, animated: true)
+    private func showPhoto(by photoViewModel: PhotoViewModel, in navigationController: UINavigationController) -> Observable<Void> {
+        let photoDetailsCoordinator = PhotoDetailsCoordinator(rootViewController: navigationController, photo: photoViewModel)
+        return coordinate(to: photoDetailsCoordinator)
     }
 }
