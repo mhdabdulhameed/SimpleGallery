@@ -27,7 +27,9 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 1.0
         flowLayout.minimumInteritemSpacing = 1.0
-        flowLayout.itemSize = UIDevice.current.orientation.isPortrait ? CGSize(width: view.frame.width / 4 - 1, height: view.frame.width / 4 - 1) : CGSize(width: view.frame.width / 6 - 1, height: view.frame.width / 6 - 1)
+        flowLayout.itemSize = UIKitUtils.isPortrait() ?
+            CGSize(width: view.frame.width / 4 - 1, height: view.frame.width / 4 - 1) :
+            CGSize(width: view.frame.width / 6 - 1, height: view.frame.width / 6 - 1)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(UINib(nibName: Constants.NibFilesNames.photoCollectionViewCell, bundle: nil),
                                 forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier)
@@ -58,7 +60,9 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         super.viewWillTransition(to: size, with: coordinator)
 
         if let flowLayout = photosCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.itemSize = UIDevice.current.orientation.isPortrait ? CGSize(width: size.width / 4 - 1, height: size.width / 4 - 1) : CGSize(width: size.width / 6 - 1, height: size.width / 6 - 1)
+            flowLayout.itemSize = UIKitUtils.isPortrait() ?
+                CGSize(width: size.width / 4 - 1, height: size.width / 4 - 1) :
+                CGSize(width: size.width / 6 - 1, height: size.width / 6 - 1)
         }
     }
     

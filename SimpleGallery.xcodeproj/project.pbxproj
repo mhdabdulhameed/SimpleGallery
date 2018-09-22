@@ -11,6 +11,7 @@
 		6866A8BD215657A00017223C /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6866A8BC215657A00017223C /* AlertManager.swift */; };
 		6866A8BF215658200017223C /* DefaultAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6866A8BE215658200017223C /* DefaultAlertManager.swift */; };
 		6866A8C2215658E60017223C /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6866A8C1215658E60017223C /* UIApplication+Extensions.swift */; };
+		6866A8C42156AF9A0017223C /* UIKitUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6866A8C32156AF9A0017223C /* UIKitUtils.swift */; };
 		68987EF92152DEC800101D23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68987EF82152DEC800101D23 /* AppDelegate.swift */; };
 		68987F012152DEC800101D23 /* SimpleGallery.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68987EFF2152DEC800101D23 /* SimpleGallery.xcdatamodeld */; };
 		68987F032152DEC900101D23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68987F022152DEC900101D23 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		6866A8BC215657A00017223C /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		6866A8BE215658200017223C /* DefaultAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlertManager.swift; sourceTree = "<group>"; };
 		6866A8C1215658E60017223C /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		6866A8C32156AF9A0017223C /* UIKitUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitUtils.swift; sourceTree = "<group>"; };
 		68987EF52152DEC800101D23 /* SimpleGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68987EF82152DEC800101D23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68987F002152DEC800101D23 /* SimpleGallery.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleGallery.xcdatamodel; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 		68987FB12155AC3700101D23 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6866A8C32156AF9A0017223C /* UIKitUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				68987F272152E40400101D23 /* MoyaNetworkManager.swift in Sources */,
 				68987F162152E06900101D23 /* ViewControllerType.swift in Sources */,
 				68987F182152E08B00101D23 /* ViewModelProtocol.swift in Sources */,
+				6866A8C42156AF9A0017223C /* UIKitUtils.swift in Sources */,
 				6866A8C2215658E60017223C /* UIApplication+Extensions.swift in Sources */,
 				68987FB72155B67500101D23 /* PhotoDetailsViewController.swift in Sources */,
 				68987F9E2155893B00101D23 /* Photo.swift in Sources */,
