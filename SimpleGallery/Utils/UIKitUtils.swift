@@ -13,4 +13,8 @@ class UIKitUtils {
         let orientation = UIApplication.shared.statusBarOrientation
         return orientation == .portrait || orientation == .portraitUpsideDown
     }
+    
+    static func isWideScreen() -> Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad || !isPortrait()
+    }
 }

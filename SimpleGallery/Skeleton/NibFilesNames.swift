@@ -10,6 +10,7 @@ extension Constants {
     struct NibFilesNames {
         static let albumTableViewCell = "AlbumTableViewCell"
         static let photoCollectionViewCell = "PhotoCollectionViewCell"
+        static let albumCollectionViewCell = "AlbumCollectionViewCell"
         
         private init() { }
     }

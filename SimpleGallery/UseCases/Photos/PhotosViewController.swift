@@ -19,6 +19,14 @@ final class PhotosViewController: UIViewController, ViewControllerType {
     
     private let disposeBag = DisposeBag()
     
+    private var photosCollectionViewPortraitItemSize: CGSize {
+        return CGSize(width: view.frame.width / 4 - 1, height: view.frame.width / 4 - 1)
+    }
+    
+    private var photosCollectionViewLandscapeItemSize: CGSize {
+        return CGSize(width: view.frame.width / 6 - 1, height: view.frame.width / 6 - 1)
+    }
+    
     private lazy var refreshControl: UIRefreshControl = {
         return UIRefreshControl()
     }()
@@ -27,9 +35,6 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 1.0
         flowLayout.minimumInteritemSpacing = 1.0
-        flowLayout.itemSize = UIKitUtils.isPortrait() ?
-            CGSize(width: view.frame.width / 4 - 1, height: view.frame.width / 4 - 1) :
-            CGSize(width: view.frame.width / 6 - 1, height: view.frame.width / 6 - 1)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(UINib(nibName: Constants.NibFilesNames.photoCollectionViewCell, bundle: nil),
                                 forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier)
@@ -61,8 +66,7 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         
         if let flowLayout = photosCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.itemSize = UIKitUtils.isPortrait() ?
-                CGSize(width: view.frame.width / 4 - 1, height: view.frame.width / 4 - 1) :
-                CGSize(width: view.frame.width / 6 - 1, height: view.frame.width / 6 - 1)
+                photosCollectionViewPortraitItemSize : photosCollectionViewLandscapeItemSize
         }
     }
     
