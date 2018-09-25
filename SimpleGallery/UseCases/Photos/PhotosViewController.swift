@@ -16,6 +16,7 @@ final class PhotosViewController: UIViewController, ViewControllerType {
     // MARK: - Properties
     
     var viewModel: PhotosViewModel!
+    var alertManager: AlertManager!
     
     private let disposeBag = DisposeBag()
     
@@ -81,6 +82,14 @@ final class PhotosViewController: UIViewController, ViewControllerType {
             .bind(to: photosCollectionView.rx.items(cellIdentifier: PhotoCollectionViewCell.reuseIdentifier, cellType: PhotoCollectionViewCell.self)) { _, item, cell in
                 cell.configure(with: item)
             }
+            .disposed(by: disposeBag)
+
+        // When errorsObservable show an alert showing a description of the emitted error.
+        viewModel.output.errorsObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [alertManager] error in
+                alertManager?.showAlert(title: "Error", message: error.localizedDescription)
+            })
             .disposed(by: disposeBag)
         
         // View Controller UI actions to the View Model

@@ -26,6 +26,9 @@ class DefaultAlertManager: AlertManager {
                 }
                 alert.addAction(action)
             }
+        } else {
+            let action = UIAlertAction(title: "OK", style: .default) { _ in }
+            alert.addAction(action)
         }
         
         UIApplication.topViewController()?.present(alert, animated: true)

@@ -16,6 +16,7 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
     // MARK: - Properties
     
     var viewModel: AlbumsViewModel!
+    var alertManager: AlertManager!
     
     private let disposeBag = DisposeBag()
     
@@ -106,6 +107,14 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
             .bind(to: albumsCollectionView.rx.items(cellIdentifier: AlbumCollectionViewCell.reuseIdentifier, cellType: AlbumCollectionViewCell.self)) { _, item, cell in
                 cell.configure(with: item)
             }
+            .disposed(by: disposeBag)
+        
+        // When errorsObservable show an alert showing a description of the emitted error.
+        viewModel.output.errorsObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [alertManager] error in
+                alertManager?.showAlert(title: "Error", message: error.localizedDescription)
+            })
             .disposed(by: disposeBag)
         
         // View Controller UI actions to the View Model

@@ -19,11 +19,12 @@ final class AlbumsCoordinator: BaseCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         
-        // Create an instance of `AlbumsViewModel` and an instane of `AlbumsViewController` and inject the view model in the view controller.
+        // Create an instance of `AlbumsViewModel` and an instane of `AlbumsViewController` and inject the view model and alert manager in the view controller.
         
         let viewModel = AlbumsViewModel()
         let viewController = AlbumsViewController()
         viewController.viewModel = viewModel
+        viewController.alertManager = DefaultAlertManager.shared
         
         let navigationController = UINavigationController(rootViewController: viewController)
         

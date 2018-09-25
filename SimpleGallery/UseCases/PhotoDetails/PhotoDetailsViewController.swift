@@ -79,6 +79,14 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
             })
             .disposed(by: disposeBag)
         
+        // When errorsObservable show an alert showing a description of the emitted error.
+        viewModel.output.errorsObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [alertManager] error in
+                alertManager?.showAlert(title: "Error", message: error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
+        
         // Set the image of photoImageView
         viewModel.output.photoUrl
             .subscribe(onNext: { [photoImageView] url in

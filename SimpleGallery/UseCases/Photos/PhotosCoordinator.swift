@@ -23,11 +23,12 @@ final class PhotosCoordinator: BaseCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         
-        // Create an instance of `PhotosViewModel` and an instane of `PhotosViewController` and inject the view model in the view controller.
+        // Create an instance of `PhotosViewModel` and an instane of `PhotosViewController` and inject the view model and alert manager in the view controller.
         
         let photosViewController = PhotosViewController()
         let viewModel = PhotosViewModel(albumId: albumId, albumTitle: albumTitle)
         photosViewController.viewModel = viewModel
+        photosViewController.alertManager = DefaultAlertManager.shared
         
         navigationController.pushViewController(photosViewController, animated: true)
         
