@@ -11,6 +11,7 @@ import Moya
 enum GalleryAPI {
     case albums
     case photos(albumId: Int)
+    case photo(photoId: Int)
 }
 
 extension GalleryAPI: TargetType {
@@ -23,14 +24,14 @@ extension GalleryAPI: TargetType {
         switch self {
         case .albums:
             return Constants.APIConstants.albums
-        case .photos:
+        case .photos, .photo:
             return Constants.APIConstants.photos
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .albums, .photos:
+        case .albums, .photos, .photo:
             return .get
         }
     }
@@ -45,12 +46,14 @@ extension GalleryAPI: TargetType {
             return .requestPlain
         case .photos(let albumId):
             return .requestCompositeParameters(bodyParameters: [:], bodyEncoding: JSONEncoding.default, urlParameters: [Constants.APIConstants.albumId: albumId])
+        case .photo(let photoId):
+            return .requestCompositeParameters(bodyParameters: [:], bodyEncoding: JSONEncoding.default, urlParameters: [Constants.APIConstants.photoId: photoId])
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .albums, .photos:
+        case .albums, .photos, .photo:
             return nil
         }
     }

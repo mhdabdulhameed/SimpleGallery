@@ -19,14 +19,6 @@ final class PhotosViewController: UIViewController, ViewControllerType {
     
     private let disposeBag = DisposeBag()
     
-    private var photosCollectionViewPortraitItemSize: CGSize {
-        return CGSize(width: view.frame.width / 4 - 1, height: view.frame.width / 4 - 1)
-    }
-    
-    private var photosCollectionViewLandscapeItemSize: CGSize {
-        return CGSize(width: view.frame.width / 6 - 1, height: view.frame.width / 6 - 1)
-    }
-    
     private lazy var refreshControl: UIRefreshControl = {
         return UIRefreshControl()
     }()
@@ -57,17 +49,16 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         
         activityIndicator.startAnimating()
         
+        setPhotosCollectionViewItemSize(with: view.frame.size)
+        
         configure(with: viewModel)
         addViews()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
-        if let flowLayout = photosCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.itemSize = UIKitUtils.isPortrait() ?
-                photosCollectionViewPortraitItemSize : photosCollectionViewLandscapeItemSize
-        }
+        setPhotosCollectionViewItemSize(with: size)
     }
     
     // MARK: - ViewControllerType Conformation
@@ -132,4 +123,20 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         photosCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
+    private func setPhotosCollectionViewItemSize(with size: CGSize) {
+        if let flowLayout = photosCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.itemSize = size.height > size.width ?
+                photosCollectionViewPortraitItemSize(for: size) :
+                photosCollectionViewLandscapeItemSize(for: size)
+        }
+
+    }
+    
+    private func photosCollectionViewPortraitItemSize(for size: CGSize) -> CGSize {
+        return CGSize(width: size.width / 4 - 1, height: size.width / 4 - 1)
+    }
+    
+    private func photosCollectionViewLandscapeItemSize(for size: CGSize) -> CGSize {
+        return CGSize(width: size.width / 6 - 1, height: size.width / 6 - 1)
+    }
 }

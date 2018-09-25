@@ -14,6 +14,7 @@ extension Constants {
         static let photos = "photos"
         
         static let albumId = "albumId"
+        static let photoId = "id"
         
         private init() { }
     }
