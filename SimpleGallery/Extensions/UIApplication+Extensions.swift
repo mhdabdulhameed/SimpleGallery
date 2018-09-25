@@ -9,6 +9,10 @@
 import UIKit
 
 extension UIApplication {
+    /// Returns the top most view controller.
+    ///
+    /// - Parameter controller: An optional parameter that can be the current view controller.
+    /// - Returns: The top most view controller if it was find, else this method will return nil.
     class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)

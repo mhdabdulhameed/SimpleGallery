@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        // Create an `AppCoordinator` instance and start it to create the first view controller.
         let window = UIWindow()
         let appCoordinator = AppCoordinator(window: window)
         appCoordinator.start()

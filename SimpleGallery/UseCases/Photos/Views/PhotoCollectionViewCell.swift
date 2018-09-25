@@ -10,6 +10,7 @@ import UIKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
     
+    /// `PhotoCollectionViewCell` reuse identifier.
     static let reuseIdentifier = String(describing: PhotoCollectionViewCell.self)
     
     // MARK: - IBOutlets
@@ -18,7 +19,12 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Methods
     
+    /// Configures a cell with view model.
+    ///
+    /// - Parameter photoViewModel: an instance of `PhotoViewModel` to configure the cell with.
     func configure(with photoViewModel: PhotoViewModel) {
+        
+        // Set the thumbnail image from remote URL and animte its display.
         SDWebImageHelper.setImage(for: thumbnailImageView, from: photoViewModel.url) { [weak self] in
             self?.thumbnailImageView.alpha = 0
             UIView.animate(withDuration: 0.2) {

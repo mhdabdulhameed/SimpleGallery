@@ -23,6 +23,7 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         return UIRefreshControl()
     }()
     
+    /// Create and customize photosCollectionView lazily.
     private lazy var photosCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 1.0
@@ -58,6 +59,7 @@ final class PhotosViewController: UIViewController, ViewControllerType {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
+        // The item size of the collection should be changed whenever the device rotates.
         setPhotosCollectionViewItemSize(with: size)
     }
     
@@ -67,10 +69,12 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         
         // View Model outputs to the View Controller
         
+        // Set the title.
         viewModel.output.title
             .bind(to: navigationItem.rx.title)
             .disposed(by: disposeBag)
         
+        // Bind `photos` from view model to photosCollectionView. Once the data is loaded we'll hide the refresh control.
         viewModel.output.photos
             .observeOn(MainScheduler.instance)
             .do(onNext: { [weak self] _ in self?.activityIndicator.stopAnimating() })
@@ -81,18 +85,21 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         
         // View Controller UI actions to the View Model
         
+        // Notify the view model that the view controller did load.
         viewModel.input.viewDidLoad.onNext(())
         
+        // Bind valueChanged of refreshControl to reload Observer of view model.
         refreshControl.rx.controlEvent(.valueChanged)
             .bind(to: viewModel.input.reload)
             .disposed(by: disposeBag)
         
+        // Handle photosCollectionView item selection and bind it to selectPhoto Observable from view model.
+        // We will also give the selected a hero id to be used in animating the display of photo details.
         photosCollectionView.rx.modelSelected(PhotoViewModel.self)
             .do(onNext: { [weak self] photoViewModel in
                 if let selectedItemIndexPath = self?.photosCollectionView.indexPathsForSelectedItems?.first {
                     self?.photosCollectionView.deselectItem(at: selectedItemIndexPath, animated: true)
-//                    heroId = selectedItemIndexPath.item
-                    self?.photosCollectionView.cellForItem(at: selectedItemIndexPath)?.hero.id = String(photoViewModel.id) // String(heroId)
+                    self?.photosCollectionView.cellForItem(at: selectedItemIndexPath)?.hero.id = String(photoViewModel.id)
                 }
             })
             .bind(to: viewModel.input.selectPhoto)
@@ -123,19 +130,29 @@ final class PhotosViewController: UIViewController, ViewControllerType {
         photosCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
+    /// Set the suitable item size of photosCollectionView.
     private func setPhotosCollectionViewItemSize(with size: CGSize) {
         if let flowLayout = photosCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.itemSize = size.height > size.width ?
-                photosCollectionViewPortraitItemSize(for: size) :
-                photosCollectionViewLandscapeItemSize(for: size)
+            flowLayout.itemSize = photosCollectionViewItemSize(for: size)
         }
-
     }
-    
+
+    /// Returns the suitable item size for photosCollectionView based on curren device orientation.
+    ///
+    /// - Parameter size: parent view size.
+    /// - Returns: The suitable item size.
+    private func photosCollectionViewItemSize(for size: CGSize) -> CGSize {
+        return size.height > size.width ?
+            photosCollectionViewPortraitItemSize(for: size) :
+            photosCollectionViewLandscapeItemSize(for: size)
+    }
+
+    /// Returns the suitable item size for Portrait mode.
     private func photosCollectionViewPortraitItemSize(for size: CGSize) -> CGSize {
         return CGSize(width: size.width / 4 - 1, height: size.width / 4 - 1)
     }
     
+    /// Returns the suitable item size for Landscape mode.
     private func photosCollectionViewLandscapeItemSize(for size: CGSize) -> CGSize {
         return CGSize(width: size.width / 6 - 1, height: size.width / 6 - 1)
     }

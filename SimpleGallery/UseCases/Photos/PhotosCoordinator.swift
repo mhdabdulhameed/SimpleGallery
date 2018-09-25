@@ -22,10 +22,16 @@ final class PhotosCoordinator: BaseCoordinator<Void> {
     }
     
     override func start() -> Observable<Void> {
+        
+        // Create an instance of `PhotosViewModel` and an instane of `PhotosViewController` and inject the view model in the view controller.
+        
         let photosViewController = PhotosViewController()
         let viewModel = PhotosViewModel(albumId: albumId, albumTitle: albumTitle)
         photosViewController.viewModel = viewModel
+        
         navigationController.pushViewController(photosViewController, animated: true)
+        
+        // When showPhoto is triggered we should the next screen.
         
         viewModel.output.showPhoto
             .flatMapLatest { [showPhoto, navigationController] photo -> Observable<Void> in
@@ -37,6 +43,12 @@ final class PhotosCoordinator: BaseCoordinator<Void> {
         return Observable.just(())
     }
     
+    /// Navigates to photo details screen.
+    ///
+    /// - Parameters:
+    ///   - photoViewModel: The view model of the photo to show.
+    ///   - navigationController: The controller to display the photo on.
+    /// - Returns: An Observable that returns the result of this navigation.
     private func showPhoto(by photoViewModel: PhotoViewModel, in navigationController: UINavigationController) -> Observable<Void> {
         let photoDetailsCoordinator = PhotoDetailsCoordinator(rootViewController: navigationController, photo: photoViewModel)
         return coordinate(to: photoDetailsCoordinator)

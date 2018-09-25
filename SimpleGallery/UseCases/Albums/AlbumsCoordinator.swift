@@ -18,15 +18,21 @@ final class AlbumsCoordinator: BaseCoordinator<Void> {
     }
     
     override func start() -> Observable<Void> {
+        
+        // Create an instance of `AlbumsViewModel` and an instane of `AlbumsViewController` and inject the view model in the view controller.
+        
         let viewModel = AlbumsViewModel()
         let viewController = AlbumsViewController()
         viewController.viewModel = viewModel
+        
         let navigationController = UINavigationController(rootViewController: viewController)
+        
+        // When showPhotos is triggered we should the next screen.
         
         viewModel.output.showPhotos
             .flatMapLatest { [weak self, navigationController] album -> Observable<Void> in
                 guard let strongSelf = self else { return .empty() }
-                return strongSelf.showPhoto(of: album.albumId, and: album.albumTitle, in: navigationController)
+                return strongSelf.showPhotos(of: album.albumId, and: album.albumTitle, in: navigationController)
             }
             .subscribe()
             .disposed(by: disposeBag)
@@ -37,7 +43,14 @@ final class AlbumsCoordinator: BaseCoordinator<Void> {
         return Observable.never()
     }
     
-    func showPhoto(of albumId: Int, and albumTitle: String, in navigationController: UINavigationController) -> Observable<Void> {
+    /// Navigates to the photos screen.
+    ///
+    /// - Parameters:
+    ///   - albumId: The ID of the album we want to show its photos.
+    ///   - albumTitle: The title of the album we want to show its photos.
+    ///   - navigationController: The navigation controller to push the new controller to.
+    /// - Returns: An Observable that returns the result of this navigation. In this case it's an Observable of Void because we don't we want to get any value from photos screen.
+    func showPhotos(of albumId: Int, and albumTitle: String, in navigationController: UINavigationController) -> Observable<Void> {
         let photosCoordinator = PhotosCoordinator(navigationController: navigationController, albumId: albumId, albumTitle: albumTitle)
         return coordinate(to: photosCoordinator)
     }

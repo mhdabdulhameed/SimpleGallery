@@ -8,6 +8,11 @@
 
 import Moya
 
+/// The End Points of jsonplaceholder.typicode.com.
+///
+/// - albums: AlbumsEndPoint (to get all albums).
+/// - photos: Photos End Point (to get the photos of a certain album).
+/// - photo: Photo End Point (to get a photo by its ID).
 enum GalleryAPI {
     case albums
     case photos(albumId: Int)

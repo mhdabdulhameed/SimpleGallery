@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A default implementation of the `AlertManager` that uses the native `UIAlertController`.
 class DefaultAlertManager: AlertManager {
     
     static let shared = DefaultAlertManager()

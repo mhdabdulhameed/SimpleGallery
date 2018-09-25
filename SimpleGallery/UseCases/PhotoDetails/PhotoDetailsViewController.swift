@@ -21,6 +21,7 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     
     private let disposeBag = DisposeBag()
     
+    /// Create and customize photoImageView lazily.
     private lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
@@ -36,8 +37,11 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        // Enable hero to be able to show the view controller with the appropriate animation.
         hero.isEnabled = true
         
+        // Add a gesture recoginzer to be used to dismiss the view controller.
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap)))
         
         configure(with: viewModel)
@@ -46,6 +50,8 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        // Set the size of photoImageView taking rotation into consideration.
         
         if UIKitUtils.isPortrait() {
             photoImageView.frame = CGRect(x: (view.bounds.width - 250) / 2,
@@ -66,12 +72,14 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
         
         // View Model outputs to the View Controller
         
+        // Bind photoId to photoImageView.hero.id to make the display of the view controller smooth by animating its presentation using Hero.
         viewModel.output.photoId
             .subscribe(onNext: { [photoImageView] photoId in
                 photoImageView.hero.id = photoId
             })
             .disposed(by: disposeBag)
         
+        // Set the image of photoImageView
         viewModel.output.photoUrl
             .subscribe(onNext: { [photoImageView] url in
                 SDWebImageHelper.setImage(for: photoImageView, from: url)
@@ -88,6 +96,7 @@ final class PhotoDetailsViewController: UIViewController, ViewControllerType {
         view.addSubview(photoImageView)
     }
     
+    /// Disimss the view controller on user's tap.
     @objc func onTap() {
         dismiss(animated: true)
     }

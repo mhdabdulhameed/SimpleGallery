@@ -27,6 +27,7 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
         return UIRefreshControl()
     }()
     
+    /// Create and customize albumsTableView lazily.
     private lazy var albumsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(UINib(nibName: Constants.NibFilesNames.albumTableViewCell, bundle: nil),
@@ -41,6 +42,7 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
         return tableView
     }()
     
+    /// Create and customize albumsCollectionView lazily.
     private lazy var albumsCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 1.0
@@ -71,6 +73,7 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        // albumsCollectionView will be shown in all cases were the current screen is considered wide. In all other cases the albumsTableView will be shown.
         albumsTableView.isHidden = UIKitUtils.isWideScreen()
         albumsCollectionView.isHidden = !UIKitUtils.isWideScreen()
         
@@ -85,6 +88,8 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
         
         // View Model outputs to the View Controller
         
+        
+        // Bind `albums` from view model to albumsTableView. Once the data is loaded we'll hide the refresh control.
         viewModel.output.albums
             .observeOn(MainScheduler.instance)
             .do(onNext: { [weak self] _ in self?.refreshControl.endRefreshing() })
@@ -94,6 +99,7 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
             }
             .disposed(by: disposeBag)
         
+        // Bind `albums` from view model to albumsCollectionView. Once the data is loaded we'll hide the refresh control.
         viewModel.output.albums
             .observeOn(MainScheduler.instance)
             .do(onNext: { [weak self] _ in self?.refreshControl.endRefreshing() })
@@ -104,12 +110,15 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
         
         // View Controller UI actions to the View Model
         
+        // Notify the view model that the view controller did load.
         viewModel.input.viewDidLoad.onNext(())
         
+        // Bind valueChanged of refreshControl to reload Observer of view model.
         refreshControl.rx.controlEvent(.valueChanged)
             .bind(to: viewModel.input.reload)
             .disposed(by: disposeBag)
         
+        // Handle albumsTableView item selection and bind it to selectAlbum Observable from view model.
         albumsTableView.rx.modelSelected(AlbumViewModel.self)
             .do(onNext: { [weak self] _ in
                 if let selectedRowIndexPath = self?.albumsTableView.indexPathForSelectedRow {
@@ -119,6 +128,7 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
             .bind(to: viewModel.input.selectAlbum)
             .disposed(by: disposeBag)
         
+        // Handle albumsCollectionView item selection and bind it to selectAlbum Observable from view model.
         albumsCollectionView.rx.modelSelected(AlbumViewModel.self)
             .do(onNext: { [weak self] _ in
                 if let selectedItemIndexPath = self?.albumsCollectionView.indexPathsForSelectedItems?.first {

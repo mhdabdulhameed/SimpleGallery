@@ -9,6 +9,7 @@
 import Moya
 import RxSwift
 
+/// An implementation of `Network Manager` that uses `Moya` to make API requests.
 class MoyaNetworkManager: NetworkManager {
     
     static let shared = MoyaNetworkManager()
@@ -18,7 +19,7 @@ class MoyaNetworkManager: NetworkManager {
     }()
     
     private lazy var plugins: [PluginType] = {
-        return [NetworkLoggerPlugin(verbose: true)]
+        return [/*NetworkLoggerPlugin(verbose: true)*/]
     }()
     
     private init() { }

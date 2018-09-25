@@ -10,6 +10,7 @@ import UIKit
 
 class AlbumCollectionViewCell: UICollectionViewCell {
     
+    /// `AlbumCollectionViewCell` reuse identifier.
     static let reuseIdentifier = String(describing: AlbumCollectionViewCell.self)
     
     // MARK: - IBOutlets
@@ -19,6 +20,9 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Methods
     
+    /// Configures a cell with view model.
+    ///
+    /// - Parameter albumViewModel: an instance of `AlbumViewModel` to configure the cell with.
     func configure(with albumViewModel: AlbumViewModel) {
         albumTitleLabel.text = albumViewModel.title
     }

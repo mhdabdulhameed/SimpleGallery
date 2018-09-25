@@ -18,6 +18,7 @@ final class AppCoordinator: BaseCoordinator<Void> {
     }
     
     override func start() -> Observable<Void> {
+        // Create an instance of `AlbumsCoordinator` and coordinate to it.
         let albumsCoordinator = AlbumsCoordinator(window: window)
         return coordinate(to: albumsCoordinator)
     }
