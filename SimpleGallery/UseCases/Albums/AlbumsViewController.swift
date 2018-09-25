@@ -36,6 +36,7 @@ final class AlbumsViewController: UIViewController, ViewControllerType {
         tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.tableFooterView = UIView()
         tableView.isHidden = true
         return tableView
     }()
