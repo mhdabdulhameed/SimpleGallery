@@ -6,3 +6,6 @@ A Simple application that uses [JSONPlaceHolder](https://jsonplaceholder.typicod
 
 Install the required dependencies using: `pod install`. Then open the workspace file (SimpleGallery.xcworkspace).
 
+### What is this?
+
+This is a sample application that tries to apply MVVM-C architecutre.
